@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from base import Base
+from .base import Base
 
 class Sec(Base):
     requestHost = 'csec.api.qcloud.com'
@@ -21,7 +21,7 @@ def main():
         'script': 0,
     }
     service = Sec(config)
-    print service.call(action, params)
+    print(service.call(action, params))
 
 if (__name__ == '__main__'):
     main()

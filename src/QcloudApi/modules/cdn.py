@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import os
-from base import Base
+from .base import Base
 
 class Cdn(Base):
     requestHost = 'cdn.api.qcloud.com'
@@ -10,9 +10,9 @@ class Cdn(Base):
     def UploadCdnEntity(self, params):
         action = 'UploadCdnEntity'
         if (params.get('entityFile') == None):
-            raise ValueError, 'entityFile can not be empty.'
+            raise ValueError('entityFile can not be empty.')
         if (os.path.isfile(params['entityFile']) == False):
-            raise ValueError, 'entityFile is not exist.'
+            raise ValueError('entityFile is not exist.')
 
         file = params.pop('entityFile')
         if ('entityFileMd5' not in params):
@@ -36,7 +36,7 @@ def main():
         'entityFile': '/tmp/test.txt'
     }
     service = Cdn(config)
-    print service.UploadCdnEntity(params)
+    print(service.UploadCdnEntity(params))
 
 if (__name__ == '__main__'):
     main()

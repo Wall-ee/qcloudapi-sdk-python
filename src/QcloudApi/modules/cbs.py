@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from base import Base
+from .base import Base
 
 class Cbs(Base):
     requestHost = 'cbs.api.qcloud.com'
@@ -16,7 +16,7 @@ def main():
     }
     params = {}
     service = Cbs(config)
-    print service.call(action, params)
+    print(service.call(action, params))
 
 if (__name__ == '__main__'):
     main()

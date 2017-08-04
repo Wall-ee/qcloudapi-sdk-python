@@ -21,9 +21,9 @@ class Sign:
             list[param_key] = params[param_key]
         srcStr = method.upper() + requestHost + requestUri + '?' + "&".join(k.replace("_",".") + "=" + str(list[k]) for k in sorted(list.keys()))
         if flag_sha256 == 1:
-            hashed = hmac.new(self.secretKey, srcStr, hashlib.sha256)
+            hashed = hmac.new(self.secretKey.encode(), srcStr.encode(), hashlib.sha256)
         else:
-            hashed = hmac.new(self.secretKey, srcStr, hashlib.sha1)    
+            hashed = hmac.new(self.secretKey.encode(), srcStr.encode(), hashlib.sha1)
         return binascii.b2a_base64(hashed.digest())[:-1]
 
 def main():
@@ -31,7 +31,7 @@ def main():
     secretKey = 'xxx'
     params = {}
     sign = Sign(secretId, secretKey)
-    print sign.make('https://cvm.api.qcloud.com', '/v2/index.php', params)
+    print(sign.make('https://cvm.api.qcloud.com', '/v2/index.php', params))
 
 if (__name__ == '__main__'):
     main()

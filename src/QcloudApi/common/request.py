@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import requests
-from sign import Sign
+from .sign import Sign
 
 class Request:
     timeout = 10
@@ -16,7 +16,7 @@ class Request:
         params['RequestClient'] = Request.version
         sign = Sign(self.secretId, self.secretKey)
         params['Signature'] = sign.make(requestHost, requestUri, params, method)
-        params = urllib.urlencode(params)
+        params = urllib.parse.urlencode(params)
 
         url = 'https://%s%s' % (requestHost, requestUri)
         if (method.upper() == 'GET'):
@@ -34,11 +34,11 @@ class Request:
         if (method.upper() == 'GET'):
             req = requests.get(url, params=params, timeout=Request.timeout, verify=False)
             if (debug):
-                print 'url:', req.url, '\n'
+                print('url:', req.url, '\n')
         else:
             req = requests.post(url, data=params, files=files, timeout=Request.timeout, verify=False)
             if (debug):
-                print 'url:', req.url, '\n'
+                print('url:', req.url, '\n')
 
         if req.status_code != requests.codes.ok:
             req.raise_for_status()
@@ -50,8 +50,8 @@ def main():
     secretKey = 'test'
     params = {}
     request = Request(secretId, secretKey)
-    print request.generateUrl('cvm.api.qcloud.com', '/v2/index.php', params)
-    print request.send('cvm.api.qcloud.com', '/v2/index.php', params)
+    print(request.generateUrl('cvm.api.qcloud.com', '/v2/index.php', params))
+    print(request.send('cvm.api.qcloud.com', '/v2/index.php', params))
 
 if (__name__ == '__main__'):
     main()

@@ -2,7 +2,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from base import Base
+from .base import Base
 
 class Tdsql(Base):
     requestHost = 'tdsql.api.qcloud.com'
@@ -17,7 +17,7 @@ def main():
     }
     params = {}
     service = Tdsql(config)
-    print service.call(action, params)
+    print(service.call(action, params))
 
 if (__name__ == '__main__'):
     main()

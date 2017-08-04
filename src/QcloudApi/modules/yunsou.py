@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from base import Base
+from .base import Base
 
 class Yunsou(Base):
     requestHost = 'yunsou.api.qcloud.com'
@@ -21,7 +21,7 @@ def main():
         "num_per_page" : 10,
     }
     service = Yunsou(config)
-    print service.call(action, params)
+    print(service.call(action, params))
 
 if (__name__ == '__main__'):
     main()
